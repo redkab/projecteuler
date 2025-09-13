@@ -3,7 +3,7 @@
 int is_palindrome(int x)
 {
     int rem; 
-    int sum;
+    int sum=0;
     int temp;
     temp = x;
 
@@ -19,28 +19,33 @@ int is_palindrome(int x)
 int main()
 {
     int max=0;
-    int y, i, j, prod;
-    int pal_max = 0;
+      int y, i, j, prod;
+      int pal_max = 0;
 
-    for( i=0; i<1000; i++)
+      for( i=100; i<1000; i++)
+      {
+      for(j=100; j<1000; j++)
+      {
+      prod = i*j;
+    //printf("%d times %d is %d\n", i, j, prod);
+    if(prod > pal_max && is_palindrome(prod))
     {
-        for(j=0; j<1000; j++)
-        {
-            prod = i*j;
-            printf("%d times %d is %d\n", i, j, prod);
-            
-            if(prod > max)
-            {
-                max = prod;
-                if(is_palindrome(max)==1)
-                {
-                    pal_max = max;
-            printf("Pal Max is %d\n", pal_max);
-                }
-            }
-        }
+    pal_max = prod;
+    printf("Pal Max is %d\n", pal_max);
+    }
+    }
     }
     printf("%d\n", pal_max);
+   /* int a = 21012;
+    int b;
+    int i;
+    for(i=1; i<1000; i++)
+    {
+        if(is_palindrome(i))
+        {
+            printf("%d\n", i);
+        }
+    }*/
 }
 
 
