@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void print(int grid[][100], int n)
+void print(long long int grid[][100], int n)
 {
     int i,j;
     for(i=0; i<n; i++)
@@ -9,7 +9,7 @@ void print(int grid[][100], int n)
         {
             if(grid[i][j] != 0)
             {
-                printf("%d\t", grid[i][j]);
+                printf("%lld\t", grid[i][j]);
             }
         }
         printf("\n");
@@ -17,7 +17,7 @@ void print(int grid[][100], int n)
 }
 int main()
 {
- int grid[100][100] = {0};
+ long long int grid[100][100] = {0};
     grid[0][0] = 1;
     int i,j;
     for(i=0; i<100; i++)
@@ -32,7 +32,7 @@ int main()
         }
     }
     int n;
-    scanf("%d", &n);
-   print(grid,n); 
-   //printf("%lld\n", grid[40][20]);
+    //scanf("%d", &n);
+   //print(grid,n); 
+   printf("%lld\n", grid[40][20]);
 }
