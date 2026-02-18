@@ -1,50 +1,77 @@
 #include<stdio.h>
-#include<math.h>
+#include<stdlib.h>
+
 int count(int x)
 {
-    int count=0;
+    int c=0;
     while(x)
     {
-        count++;
-        x /= 10;
+        x/=10;
+        c++;
     }
-    return count;
+    return c;
 }
 
-int is_prime(int x)
+void print(int *arr, int n)
 {
-    for(int i=2; i*i <= x; i++)
+    for(int i=0; i<n; i++)
     {
-        if(x%i==0)return 0;
+        printf("%d", arr[i]);
+    }
+    printf("\n");
+}
+int rotate(int x, int c)
+{
+    int *arr = (int *)calloc(c,sizeof(int));
+    int i=c-1;
+    while(x)
+    {
+        arr[i--] = x%10;
+        x/=10;
+    }
+    int buff = arr[0];
+    for(int i=0; i<c-1; i++)
+    {
+        arr[i] = arr[i+1];
+    }
+    arr[c-1] = buff;
+    int num=0, b=1;
+    for(int i=c-1; i>=0; i--)
+    {
+        num += arr[i]*b;
+        b*=10;
+    }
+    free(arr);
+    return num;
+}
+
+int isPrime(int x)
+{
+    for(int i=2; i*i<=x; i++)
+    {
+        if(!(x%i))return 0;
     }
     return 1;
 }
 
-int rotate(int x)
+int isCircular(int x)
 {
     int c = count(x);
-    int a = x/pow(10, c-1);
-    int b = x%(int)pow(10, c-1);
-    return  b*10 + a;
-}
-
-int is_circular(int x)
-{
-    for(int i=0; i<count(x); i++)
+    int y=x;
+    for(int i=0; i<c; i++)
     {
-        if(is_prime(x)==0)return 0;
-        x = rotate(x);
+        if(!isPrime(y))return 0;
+        y = rotate(y, c);
     }
     return 1;
 }
-
 int main()
 {
-    int count=0;
-    for(int i=2; i<=1000000; i++)
+    int c=0;
+    for(int i=2; i<1000000; i++)
     {
-        if(is_circular(i))count++;
-        printf("i is %d and count is %d\n", i, count);
+        if(isCircular(i))c++;
+        printf("Checking %d count is %d\n", i, c);
     }
-
+    printf("FInal ans is %d\n", c);
 }
